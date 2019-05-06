@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)https://shahsparx.me/edge-detection-opencv-python-video-image/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="jetpack-lazy-images-js-enabled gr__shahsparx_me"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/f(4).txt"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<title>Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v9.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="In this tutorial, I explain edge detection in OpenCV techniques. I show you how to perform edge detection in OpenCV with Sobel, Laplacian, and Canny methods">
+<link rel="canonical" href="https://shahsparx.me/edge-detection-opencv-python-video-image/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad">
+<meta property="og:description" content="In this tutorial, I explain edge detection in OpenCV techniques. I show you how to perform edge detection in OpenCV with Sobel, Laplacian, and Canny methods">
+<meta property="og:url" content="https://shahsparx.me/edge-detection-opencv-python-video-image/">
+<meta property="og:site_name" content="Syed Shahrukh Ahmad">
+<meta property="article:section" content="OpenCV">
+<meta property="article:published_time" content="2017-07-02T01:50:04+00:00">
+<meta property="og:image" content="http://shahsparx.me/wp-content/uploads/2017/07/Edge-detection-in-OpenCV.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="In this tutorial, I explain edge detection in OpenCV techniques. I show you how to perform edge detection in OpenCV with Sobel, Laplacian, and Canny methods">
+<meta name="twitter:title" content="Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad">
+<meta name="twitter:image" content="http://shahsparx.me/wp-content/uploads/2017/07/Edge-detection-in-OpenCV.png">
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://checkout.stripe.com/">
+<link rel="dns-prefetch" href="https://secure.gravatar.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Syed Shahrukh Ahmad » Feed" href="https://shahsparx.me/feed/">
+<link rel="alternate" type="application/rss+xml" title="Syed Shahrukh Ahmad » Comments Feed" href="https://shahsparx.me/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Syed Shahrukh Ahmad » Edge detection in OpenCV and Python – Detect edges in video and image Comments Feed" href="https://shahsparx.me/edge-detection-opencv-python-video-image/feed/">
+		<script src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/osd.js.download"></script><script src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/ca-pub-2773701569602236.js.download"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/shahsparx.me\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="stripe-checkout-button-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/button.css" type="text/css" media="all">
+<link rel="stylesheet" id="simpay-public-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/public.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="personalblogily-style-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="personalblogily-google-fonts-css" href="http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%7CMerriweather%3A400%2C700&amp;ver=4.9.9" type="text/css" media="all">
+<link rel="stylesheet" id="stripe-checkout-public-lite-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/shared-public-main.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="social-logos-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/social-logos.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/jquery.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/jquery-migrate.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/related-posts.min.js.download"></script>
+<link rel="https://api.w.org/" href="https://shahsparx.me/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://shahsparx.me/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://shahsparx.me/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.9.9">
+<link rel="shortlink" href="https://wp.me/p8SkXk-3S">
+<link rel="alternate" type="application/json+oembed" href="https://shahsparx.me/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fshahsparx.me%2Fedge-detection-opencv-python-video-image%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://shahsparx.me/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fshahsparx.me%2Fedge-detection-opencv-python-video-image%2F&amp;format=xml">
+
+<link rel="dns-prefetch" href="https://v0.wordpress.com/">
+<link rel="dns-prefetch" href="https://i0.wp.com/">
+<link rel="dns-prefetch" href="https://i1.wp.com/">
+<link rel="dns-prefetch" href="https://i2.wp.com/">
+<style type="text/css">img#wpstats{display:none}</style><link rel="pingback" href="https://shahsparx.me/xmlrpc.php">
+		<style type="text/css">
+		body, .site, .swidgets-wrap h3, .post-data-text { background: #ffffff; }
+		.site-title a, .site-description { color: ; }
+		.sheader { background-color: #efefef; }
+		.super-menu, #smobile-menu, .primary-menu, .primary-menu ul li ul.children, .primary-menu ul li ul.sub-menu { background-color: ; }
+		.main-navigation ul li a, .main-navigation ul li .sub-arrow, .super-menu .toggle-mobile-menu, .mobile-menu-active .smenu-hide { color: ; }
+		#smobile-menu.show .main-navigation ul ul.children.active, #smobile-menu.show .main-navigation ul ul.sub-menu.active, #smobile-menu.show .main-navigation ul li, .smenu-hide.toggle-mobile-menu.menu-toggle, #smobile-menu.show .main-navigation ul li, .primary-menu ul li ul.children li, .primary-menu ul li ul.sub-menu li { border-color: ; border-bottom-color: ; }
+		#secondary .widget h3, #secondary .widget h3 a, #secondary .widget h4, #secondary .widget h1, #secondary .widget h2, #secondary .widget h5, #secondary .widget h6 { color: ; }
+		#secondary .widget a, #secondary a, #secondary .widget li a , #secondary span.sub-arrow{ color: ; }
+		#secondary, #secondary .widget, #secondary .widget p, #secondary .widget li, .widget time.rpwe-time.published { color: ; }
+		#secondary .swidgets-wrap, #secondary .widget ul li, .featured-sidebar .search-field { border-color: ; }
+		.site-info, .footer-column-three input.search-submit, .footer-column-three p, .footer-column-three li, .footer-column-three td, .footer-column-three th, .footer-column-three caption { color: ; }
+		.footer-column-three h3, .footer-column-three h4, .footer-column-three h5, .footer-column-three h6, .footer-column-three h1, .footer-column-three h2, .footer-column-three h4, .footer-column-three h3 a { color: ; }
+		.footer-column-three a, .footer-column-three li a, .footer-column-three .widget a, .footer-column-three .sub-arrow { color: ; }
+		.footer-column-three h3:after { background: ; }
+		.site-info, .widget ul li, .footer-column-three input.search-field, .footer-column-three input.search-submit { border-color: ; }
+		.site-footer { background-color: ; }
+		.archive .page-header h1, .blogposts-list h2 a, .blogposts-list h2 a:hover, .blogposts-list h2 a:active, .search-results h1.page-title { color: ; }
+		.blogposts-list .post-data-text, .blogposts-list .post-data-text a{ color: ; }
+		.blogposts-list p { color: ; }
+		.page-numbers li a, .blogposts-list .blogpost-button { background: ; }
+		.page-numbers li a, .blogposts-list .blogpost-button, span.page-numbers.dots, .page-numbers.current, .page-numbers li a:hover { color: ; }
+		.archive .page-header h1, .search-results h1.page-title, .blogposts-list.fbox, span.page-numbers.dots, .page-numbers li a, .page-numbers.current { border-color: ; }
+		.blogposts-list .post-data-divider { background: ; }
+		.page .comments-area .comment-author, .page .comments-area .comment-author a, .page .comments-area .comments-title, .page .content-area h1, .page .content-area h2, .page .content-area h3, .page .content-area h4, .page .content-area h5, .page .content-area h6, .page .content-area th, .single  .comments-area .comment-author, .single .comments-area .comment-author a, .single .comments-area .comments-title, .single .content-area h1, .single .content-area h2, .single .content-area h3, .single .content-area h4, .single .content-area h5, .single .content-area h6, .single .content-area th, .search-no-results h1, .error404 h1 { color: ; }
+		.single .post-data-text, .page .post-data-text, .page .post-data-text a, .single .post-data-text a, .comments-area .comment-meta .comment-metadata a { color: ; }
+		.page .content-area p, .page article, .page .content-area table, .page .content-area dd, .page .content-area dt, .page .content-area address, .page .content-area .entry-content, .page .content-area li, .page .content-area ol, .single .content-area p, .single article, .single .content-area table, .single .content-area dd, .single .content-area dt, .single .content-area address, .single .entry-content, .single .content-area li, .single .content-area ol, .search-no-results .page-content p { color: ; }
+		.single .entry-content a, .page .entry-content a, .comment-content a, .comments-area .reply a, .logged-in-as a, .comments-area .comment-respond a { color: ; }
+		.comments-area p.form-submit input { background: ; }
+		.error404 .page-content p, .error404 input.search-submit, .search-no-results input.search-submit { color: ; }
+		.page .comments-area, .page article.fbox, .page article tr, .page .comments-area ol.comment-list ol.children li, .page .comments-area ol.comment-list .comment, .single .comments-area, .single article.fbox, .single article tr, .comments-area ol.comment-list ol.children li, .comments-area ol.comment-list .comment, .error404 main#main, .error404 .search-form label, .search-no-results .search-form label, .error404 input.search-submit, .search-no-results input.search-submit, .error404 main#main, .search-no-results section.fbox.no-results.not-found{ border-color: ; }
+		.single .post-data-divider, .page .post-data-divider { background: ; }
+		.single .comments-area p.form-submit input, .page .comments-area p.form-submit input { color: ; }
+
+
+
+		</style>
+				<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+					<style type="text/css">
+				html:not( .jetpack-lazy-images-js-enabled ) .jetpack-lazy-image {
+					display: none;
+				}
+			</style>
+			<script>
+				document.documentElement.classList.add(
+					'jetpack-lazy-images-js-enabled'
+				);
+			</script>
+		<link rel="stylesheet" type="text/css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/shCore.css"><link rel="stylesheet" type="text/css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="icon" href="https://i2.wp.com/shahsparx.me/wp-content/uploads/2018/09/cropped-iron_man.png?fit=32%2C32&amp;ssl=1" sizes="32x32">
+<link rel="icon" href="https://i2.wp.com/shahsparx.me/wp-content/uploads/2018/09/cropped-iron_man.png?fit=192%2C192&amp;ssl=1" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://i2.wp.com/shahsparx.me/wp-content/uploads/2018/09/cropped-iron_man.png?fit=180%2C180&amp;ssl=1">
+<meta name="msapplication-TileImage" content="https://i2.wp.com/shahsparx.me/wp-content/uploads/2018/09/cropped-iron_man.png?fit=270%2C270&amp;ssl=1">
+<link rel="preload" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/f(5).txt" as="script"><script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/f(5).txt"></script><link rel="preload" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/f(6).txt" as="script"><script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/f(6).txt"></script><link rel="preload" href="https://pagead2.googlesyndication.com/pagead/js/r20190212/r20190131/show_ads_impl.js" as="script"><style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/hovercard.min.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/services.min.css"></head>
+
+<body class="post-template-default single single-post postid-240 single-format-standard masthead-fixed" data-gr-c-s-loaded="true">
+	<div id="page" class="site">
+
+		<header id="masthead" class="sheader site-header clearfix">
+			<div class="content-wrap">
+
+				
+			<div class="site-branding">
+
+							<p class="site-title"><a href="https://shahsparx.me/" rel="home">Syed Shahrukh Ahmad</a></p>
+						<p class="site-description">Every master was a beginner once</p>
+			
+		</div><!-- .site-branding -->
+
+		
+	</div>
+	<nav id="primary-site-navigation" class="primary-menu main-navigation clearfix">
+
+		<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#" id="pull" class="smenu-hide toggle-mobile-menu menu-toggle" aria-controls="secondary-menu" aria-expanded="false">Menu</a>
+
+		<div class="content-wrap text-center">
+			<div class="center-main-menu">
+				<div id="primary-menu" class="pmenu"><ul>
+<li class="page_item page-item-8"><a href="https://shahsparx.me/about/">About</a></li>
+<li class="page_item page-item-638"><a href="https://shahsparx.me/blog/">Blog</a></li>
+<li class="page_item page-item-9"><a href="https://shahsparx.me/contact/">Contact me</a></li>
+<li class="page_item page-item-547"><a href="https://shahsparx.me/cookie-policy/">Cookie Policy</a></li>
+<li class="page_item page-item-643"><a href="https://shahsparx.me/payment-confirmation/">Payment Confirmation</a></li>
+<li class="page_item page-item-644"><a href="https://shahsparx.me/payment-failed/">Payment Failed</a></li>
+<li class="page_item page-item-211"><a href="https://shahsparx.me/privacy-policy/">Privacy Policy</a></li>
+<li class="page_item page-item-11"><a href="https://shahsparx.me/projects/">Projects</a></li>
+<li class="page_item page-item-661"><a href="https://shahsparx.me/royal-enfield-continental-gt-650/">Royal Enfield Continental GT 650</a></li>
+</ul></div>
+				</div>
+			</div>
+
+		</nav><!-- #primary-site-navigation -->
+
+		<div class="super-menu clearfix">
+			<div class="super-menu-inner">
+				<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#" id="pull" class="toggle-mobile-menu menu-toggle" aria-controls="secondary-menu" aria-expanded="false">Menu</a>
+			</div>
+		</div>
+
+		<div id="mobile-menu-overlay"></div>
+
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content clearfix">
+		<div class="content-wrap">
+
+	<div id="primary" class="featured-content content-area">
+		<main id="main" class="site-main">
+
+		
+<article id="post-240" class="posts-entry fbox post-240 post type-post status-publish format-standard hentry category-opencv">
+			<header class="entry-header">
+		<h1 class="entry-title">Edge detection in OpenCV and Python – Detect edges in video and image</h1>		<div class="entry-meta">
+			<div class="blog-data-wrapper">
+				<div class="post-data-divider"></div>
+				<div class="post-data-positioning">
+					<div class="post-data-text">
+						<span class="posted-on">Posted on <a href="https://shahsparx.me/edge-detection-opencv-python-video-image/" rel="bookmark"><time class="entry-date published updated" datetime="2017-07-02T01:50:04+00:00">July 2, 2017</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://shahsparx.me/author/shahsparx/">shahsparx</a></span></span>					</div>
+				</div>
+			</div>
+		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p><img class="size-full wp-image-257 aligncenter jetpack-lazy-image jetpack-lazy-image--handled" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/Edge-detection-in-OpenCV.png" alt="Edge detection in OpenCV" width="640" height="321" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Edge-detection-in-OpenCV.png?zoom=1.5&amp;resize=640%2C321" src-orig="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Edge-detection-in-OpenCV.png?resize=640%2C321" scale="1.5"><noscript><img class="size-full wp-image-257 aligncenter" src="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Edge-detection-in-OpenCV.png?resize=640%2C321" alt="Edge detection in OpenCV" width="640" height="321" data-recalc-dims="1" /></noscript>Hello, Readers, I hope you liked my previous posts on <a href="https://shahsparx.me/opencv-face-detection-haar-cascades/">Face detection with OpenCV</a>. I used python to show you the code. Here I am going to discuss Edge detection in <a href="http://docs.opencv.org/">OpenCV</a>. Also, I will show you how to implement Edge detection in OpenCV using python.</p>
+<p>Ready? Let’s get started.</p>
+<p>First of all, let me list the basics.</p>
+<h2>Image processing basics</h2>
+<p>What is an image? Let’s find out. Save below code as ‘image.py’ and run it as ‘python image.py.’</p>
+<div><div id="highlighter_234227" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">cv2</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="python plain">img&nbsp; </code><code class="python keyword">=</code> <code class="python plain">cv2.imread(</code><code class="python string">'photo.jpg'</code><code class="python plain">)</code></div><div class="line number4 index3 alt1"><code class="python plain">img_graysacle </code><code class="python keyword">=</code> <code class="python plain">cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="python functions">print</code> <code class="python plain">img</code></div><div class="line number7 index6 alt2"><code class="python comments">#print img_graysacle</code></div></div></td></tr></tbody></table></div></div>
+<p>Notice that the output is a 3D array. Here our image that we are printing is a colored image. Now, what if it was grayscale? Let’s find out.</p>
+<p>Hey, now we are getting a 2D array as our output of the print statement. So we got our answer. An image having all the colors, or an RGB image is 3D. And a grayscale, indexed or binary image is a 2D one. Here by 2D and 3D I mean the image’s representation.</p><div class="google-auto-placed ap_container" style="text-align: center; width: 100%; height: auto; clear: none;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-2773701569602236" data-adsbygoogle-status="done" style="display: block; margin: auto; background-color: transparent;"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:174px;margin:0;padding:0;position:relative;visibility:visible;width:694px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:174px;margin:0;padding:0;position:relative;visibility:visible;width:694px;background-color:transparent;"><iframe width="694" height="174" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0px;width:694px;height:174px;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(4).html"></iframe></ins></ins></ins></div>
+<p>The color of each pixel in a colored RGB picture depends on the combination of the red, green and blue color intensities.</p>
+<p>So, now we know how to represent images in image processing. Let’s see what an edge is.<br>
+See the image below.</p>
+<p><img class="size-full wp-image-255 aligncenter jetpack-lazy-image jetpack-lazy-image--handled" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/face_edge_detection.jpg" alt="fae edge detection" width="383" height="398" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i2.wp.com/shahsparx.me/wp-content/uploads/2017/07/face_edge_detection.jpg?zoom=1.5&amp;resize=383%2C398" src-orig="https://i2.wp.com/shahsparx.me/wp-content/uploads/2017/07/face_edge_detection.jpg?resize=383%2C398" scale="1.5"><noscript><img class="size-full wp-image-255 aligncenter" src="https://i2.wp.com/shahsparx.me/wp-content/uploads/2017/07/face_edge_detection.jpg?resize=383%2C398" alt="fae edge detection" width="383" height="398" data-recalc-dims="1" /></noscript></p><div class="google-auto-placed ap_container" style="text-align: center; width: 100%; height: auto; clear: none;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-2773701569602236" data-adsbygoogle-status="done" style="display: block; margin: auto; background-color: transparent;"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:174px;margin:0;padding:0;position:relative;visibility:visible;width:694px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:174px;margin:0;padding:0;position:relative;visibility:visible;width:694px;background-color:transparent;"><iframe width="694" height="174" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0px;width:694px;height:174px;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(5).html"></iframe></ins></ins></ins></div>
+<p>It looks like a face, more specifically, a female face. But how do we get to that inference?<br>
+Note that details like color, description, and depth are missing, but we could still tell.<br>
+It is the edges. We recognized this simple image using its edges.</p>
+<h2>Edges and Edge detection techniques</h2>
+<p>In simple terms, edges are those places in a picture where the pixel intensity changes suddenly. They are just some connected pixels that lie on the boundary between two regions with different pixel intensities.</p>
+<p>For our eyes, it is so easy to identify edges. But how can we make the computer detect edges in a picture? Let’s understand.</p><div class="google-auto-placed ap_container" style="text-align: center; width: 100%; height: auto; clear: none;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-2773701569602236" data-adsbygoogle-status="done" style="display: block; margin: auto; background-color: transparent;"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:174px;margin:0;padding:0;position:relative;visibility:visible;width:694px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:174px;margin:0;padding:0;position:relative;visibility:visible;width:694px;background-color:transparent;"><iframe width="694" height="174" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0px;width:694px;height:174px;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(6).html"></iframe></ins></ins></ins></div>
+<p>In principle, we first calculate the first derivative of the image. Then we look for those points which are peaks, and have values larger than their neighboring points Set of those connected ‘extrema’ points is an edge.</p>
+<p>But any image does contain at least some noise. We have to first of all filter out any noise. OpenCV offers a variety of filters for denoising.</p>
+<p>We choose an appropriate filter depending upon the nature of the noise. We will make the use of Gaussian blur function as an example in our Edge detection with OpenCV example.</p>
+<p>OpenCV has a lot of inbuilt functions to detect edges, corners, circles, etc. in an image. You can see some of them here: <a href="http://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=canny">OpenCV feature detection</a>. Now let us see how to perform Edge detection in OpenCV. I will use the Python binding of OpenCV. You can follow along or download the code from the link available at the end of the post.</p>
+<h2>Sobel Filter for edge detection in OpenCV</h2>
+<div><div id="highlighter_662641" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">cv2</code></div><div class="line number2 index1 alt1"><code class="python keyword">import</code> <code class="python plain">numpy as np</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="python plain">img </code><code class="python keyword">=</code> <code class="python plain">cv2.imread(</code><code class="python string">'image.jpg'</code><code class="python plain">,cv2.IMREAD_GRAYSCALE)</code></div><div class="line number5 index4 alt2"><code class="python plain">rows,cols </code><code class="python keyword">=</code> <code class="python plain">img.shape</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="python plain">sobel_horizontal </code><code class="python keyword">=</code> <code class="python plain">cv2.Sobel(img,cv2.CV_64F,</code><code class="python value">1</code><code class="python plain">,</code><code class="python value">0</code><code class="python plain">,ksize </code><code class="python keyword">=</code> <code class="python value">5</code><code class="python plain">)</code></div><div class="line number8 index7 alt1"><code class="python plain">sobel_vertical </code><code class="python keyword">=</code> <code class="python plain">cv2.Sobel(img,cv2.CV_64F,</code><code class="python value">0</code><code class="python plain">,</code><code class="python value">1</code><code class="python plain">,ksize</code><code class="python keyword">=</code><code class="python value">5</code><code class="python plain">)</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="python plain">cv2.imshow(</code><code class="python string">'Original'</code><code class="python plain">,img)</code></div><div class="line number11 index10 alt2"><code class="python plain">cv2.imshow(</code><code class="python string">'Sobel Horizontal Filter'</code><code class="python plain">,sobel_horizontal)</code></div><div class="line number12 index11 alt1"><code class="python plain">cv2.imshow(</code><code class="python string">'Sobel Vertical Filter'</code><code class="python plain">,sobel_vertical)</code></div><div class="line number13 index12 alt2">&nbsp;</div><div class="line number14 index13 alt1"><code class="python plain">cv2.waitKey(</code><code class="python value">0</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+<p>See the results.<br>
+Here is the original image converted to grayscale on line number 4.</p>
+<figure id="attachment_246" style="width: 150px" class="wp-caption aligncenter"><img class="wp-image-246 size-thumbnail jetpack-lazy-image jetpack-lazy-image--handled" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/Iron-man-edge-detection-in-opencv.jpg" alt="Iron man edge detection in opencv" width="150" height="150" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i2.wp.com/shahsparx.me/wp-content/uploads/2017/07/Iron-man-edge-detection-in-opencv.jpg?zoom=1.5&amp;resize=150%2C150" src-orig="https://i2.wp.com/shahsparx.me/wp-content/uploads/2017/07/Iron-man-edge-detection-in-opencv.jpg?resize=150%2C150" scale="1.5"><noscript><img class="wp-image-246 size-thumbnail" src="https://i2.wp.com/shahsparx.me/wp-content/uploads/2017/07/Iron-man-edge-detection-in-opencv.jpg?resize=150%2C150" alt="Iron man edge detection in opencv" width="150" height="150" data-recalc-dims="1" /></noscript><figcaption class="wp-caption-text">Original image</figcaption></figure>
+<p>And here are the results for each filter.</p>
+<figure id="attachment_247" style="width: 1191px" class="wp-caption aligncenter"><img class="wp-image-247 size-full jetpack-lazy-image jetpack-lazy-image--handled" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/Screenshot-from-2017-07-02-05-05-41-e1498952258333.png" alt="iron man edge detection opencv python" width="640" height="334" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-05-05-41-e1498952258333.png?zoom=1.5&amp;resize=640%2C334" src-orig="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-05-05-41-e1498952258333.png?resize=640%2C334" scale="1.5"><noscript><img class="wp-image-247 size-full" src="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-05-05-41-e1498952258333.png?resize=640%2C334" alt="iron man edge detection opencv python" width="640" height="334" data-recalc-dims="1" /></noscript><figcaption class="wp-caption-text">Sobel filter results</figcaption></figure>
+<p>As you can see, the result is not much impressive. The filters are calculating the gradient change from either horizontal or vertical side. Also, noise is still causing problems.</p>
+<h2>Laplacian filter for edge detection</h2>
+<p>I will try Laplacian filter now. It checks for gradient change in both directions. Let us see how that works. Use the following code.</p>
+<div><div id="highlighter_678406" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">cv2</code></div><div class="line number2 index1 alt1"><code class="python keyword">import</code> <code class="python plain">numpy as np</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="python plain">img </code><code class="python keyword">=</code> <code class="python plain">cv2.imread(</code><code class="python string">'image.jpg'</code><code class="python plain">,cv2.IMREAD_GRAYSCALE)</code></div><div class="line number5 index4 alt2"><code class="python plain">rows,cols </code><code class="python keyword">=</code> <code class="python plain">img.shape</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="python plain">denoised </code><code class="python keyword">=</code> <code class="python plain">cv2.GaussianBlur(img,(</code><code class="python value">5</code><code class="python plain">,</code><code class="python value">5</code><code class="python plain">),</code><code class="python value">0</code><code class="python plain">)</code></div><div class="line number8 index7 alt1"><code class="python functions">filter</code> <code class="python keyword">=</code> <code class="python plain">cv2.Laplacian(denoised,cv2.CV_64F)</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="python plain">cv2.imshow(</code><code class="python string">'Original'</code><code class="python plain">,img)</code></div><div class="line number11 index10 alt2"><code class="python plain">cv2.imshow(</code><code class="python string">'Laplacian Filter'</code><code class="python plain">,</code><code class="python functions">filter</code><code class="python plain">)</code></div><div class="line number12 index11 alt1">&nbsp;</div><div class="line number13 index12 alt2"><code class="python plain">cv2.waitKey(</code><code class="python value">0</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+<p>I have denoised the image using the Gaussian blur technique. Also, I have applied a Laplacian filter to the picture.</p>
+<p>And here is the result.</p>
+<figure id="attachment_250" style="width: 1188px" class="wp-caption aligncenter"><img class="size-full wp-image-250 jetpack-lazy-image jetpack-lazy-image--handled" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/Screenshot-from-2017-07-02-05-23-50-e1498953441636.png" alt="Gaussian noise reduction and Laplacian filter" width="640" height="333" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-05-23-50-e1498953441636.png?zoom=1.5&amp;resize=640%2C333" src-orig="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-05-23-50-e1498953441636.png?resize=640%2C333" scale="1.5"><noscript><img class="size-full wp-image-250" src="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-05-23-50-e1498953441636.png?resize=640%2C333" alt="Gaussian noise reduction and Laplacian filter" width="640" height="333" data-recalc-dims="1" /></noscript><figcaption class="wp-caption-text">Gaussian noise reduction and Laplacian filter</figcaption></figure>
+<p>Note now the edges are much distinct. But there is still some noise in the output. Laplacian filter applies the gradient check well on the denoised image. Impressed yet? Well, I have something more to show you.</p>
+<h2>Canny Edge detector for edge detection in OpenCV</h2>
+<p>I tried the Canny edge detector operator. It uses a multi-stage algorithm. The Canny algorithm has a low error rate hence the accuracy is great. Also, it marks the edges in the image only once. So, noise does not result in false edges.</p>
+<p>Here is the code. I have explained it below.</p>
+<div><div id="highlighter_532002" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">cv2</code></div><div class="line number2 index1 alt1"><code class="python keyword">import</code> <code class="python plain">numpy as np</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="python plain">img </code><code class="python keyword">=</code> <code class="python plain">cv2.imread(</code><code class="python string">'image.jpg'</code><code class="python plain">,cv2.IMREAD_GRAYSCALE)</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="python functions">filter</code> <code class="python keyword">=</code> <code class="python plain">cv2.Canny(img,</code><code class="python value">100</code><code class="python plain">,</code><code class="python value">200</code><code class="python plain">)</code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="python plain">cv2.imshow(</code><code class="python string">'Original'</code><code class="python plain">,img)</code></div><div class="line number9 index8 alt2"><code class="python plain">cv2.imshow(</code><code class="python string">'Laplacian Filter'</code><code class="python plain">,</code><code class="python functions">filter</code><code class="python plain">)</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="python plain">cv2.waitKey(</code><code class="python value">0</code><code class="python plain">)</code></div></div></td></tr></tbody></table></div></div>
+<p>I have not used the Gaussian blur function before passing the image through the Canny function. So Canny edge detector has to filter out the noise implicitly. You can read more features of the Canny edge detector function in OpenCV <a href="http://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html">here</a>.</p>
+<p>Let me show you the result.</p>
+<figure id="attachment_253" style="width: 1185px" class="wp-caption aligncenter"><img class="size-full wp-image-253 jetpack-lazy-image jetpack-lazy-image--handled" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/Canny-edge-detection-in-OpenCV-shahsparx.me_-e1498954741684.png" alt="Canny edge detection in OpenCV" width="640" height="334" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Canny-edge-detection-in-OpenCV-shahsparx.me_-e1498954741684.png?zoom=1.5&amp;resize=640%2C334" src-orig="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Canny-edge-detection-in-OpenCV-shahsparx.me_-e1498954741684.png?resize=640%2C334" scale="1.5"><noscript><img class="size-full wp-image-253" src="https://i0.wp.com/shahsparx.me/wp-content/uploads/2017/07/Canny-edge-detection-in-OpenCV-shahsparx.me_-e1498954741684.png?resize=640%2C334" alt="Canny edge detection in OpenCV" width="640" height="334" data-recalc-dims="1" /></noscript><figcaption class="wp-caption-text">Canny edge detection in OpenCV</figcaption></figure>
+<p>&nbsp;</p>
+<h2>&nbsp;Edge detection in OpenCV using videos in real time</h2>
+<p>How awesome would it be if we could find edges in videos? I am going to show you how we can detect edges in OpenCV of real time videos. I will be using the webcam input. So, the video feed will pass through the canny edge detector, and we will see an output feed on the screen.</p>
+<p>Make sure your web camera is working. Otherwise, you can just pass any video file from your disk to the VideoCapture() function’s parameter.&nbsp;And here is the code.</p>
+<div><div id="highlighter_911137" class="syntaxhighlighter  python"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">from</code> <code class="python plain">transform </code><code class="python keyword">import</code> <code class="python plain">four_point_transform</code></div><div class="line number2 index1 alt1"><code class="python keyword">import</code> <code class="python plain">numpy as np</code></div><div class="line number3 index2 alt2"><code class="python keyword">import</code> <code class="python plain">argparse</code></div><div class="line number4 index3 alt1"><code class="python keyword">import</code> <code class="python plain">cv2</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="python plain">cap </code><code class="python keyword">=</code> <code class="python plain">cv2.VideoCapture(</code><code class="python value">0</code><code class="python plain">)</code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="python keyword">while</code><code class="python plain">(</code><code class="python value">1</code><code class="python plain">):</code></div><div class="line number9 index8 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">ret, frame </code><code class="python keyword">=</code> <code class="python plain">cap.read()</code></div><div class="line number10 index9 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">gray_vid </code><code class="python keyword">=</code> <code class="python plain">cv2.cvtColor(frame, cv2.IMREAD_GRAYSCALE)</code></div><div class="line number11 index10 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">cv2.imshow(</code><code class="python string">'Original'</code><code class="python plain">,frame)</code></div><div class="line number12 index11 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">edged_frame </code><code class="python keyword">=</code> <code class="python plain">cv2.Canny(frame,</code><code class="python value">100</code><code class="python plain">,</code><code class="python value">200</code><code class="python plain">)</code></div><div class="line number13 index12 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">cv2.imshow(</code><code class="python string">'Edges'</code><code class="python plain">,edged_frame)</code></div><div class="line number14 index13 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python plain">k</code><code class="python keyword">=</code> <code class="python plain">cv2.waitKey(</code><code class="python value">5</code><code class="python plain">)&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;</code><code class="python value">0xFF</code></div><div class="line number15 index14 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">if</code> <code class="python plain">k</code><code class="python keyword">=</code><code class="python keyword">=</code><code class="python value">27</code><code class="python plain">:</code></div><div class="line number16 index15 alt1"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python keyword">break</code></div><div class="line number17 index16 alt2"><code class="python plain">cap.release()</code></div><div class="line number18 index17 alt1"><code class="python plain">cv2.destroyAllWindows()</code></div></div></td></tr></tbody></table></div></div>
+<p>First of all, I am reading all the frames through my webcam. Each frame is converted to grayscale. I am using the Canny edge detector in this example. Finally, I am showing both the frames as output.</p>
+<figure id="attachment_260" style="width: 1284px" class="wp-caption aligncenter"><img class="wp-image-260 size-full jetpack-lazy-image jetpack-lazy-image--handled" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/Screenshot-from-2017-07-02-06-47-54-e1498958430319.png" alt="edges detected in real time video feed" width="640" height="252" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i1.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-06-47-54-e1498958430319.png?zoom=1.5&amp;resize=640%2C252" src-orig="https://i1.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-06-47-54-e1498958430319.png?resize=640%2C252" scale="1.5"><noscript><img class="wp-image-260 size-full" src="https://i1.wp.com/shahsparx.me/wp-content/uploads/2017/07/Screenshot-from-2017-07-02-06-47-54-e1498958430319.png?resize=640%2C252" alt="edges detected in real time video feed" width="640" height="252" data-recalc-dims="1" /></noscript><figcaption class="wp-caption-text">Edges detected in real time video feed</figcaption></figure>
+<p>If you need to download all codes of this post, I have added them to my Github repository. Here is the link. <a href="https://github.com/shahsparx/Edge-detection-algorithms-comparison-in-OpenCV-Python">Edge detection algorithms comparison in OpenCV Python</a></p>
+<p>I hope you liked this simple tutorial on Edge detection with OpenCV. Please leave your comments and suggestions. If you have any questions, drop them in the comments box below. You can check out my <a href="https://shahsparx.me/category/oracle-database/">Oracle database tutorial series</a>. Also, do subscribe to this website. More tutorials are coming soon.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-240" class="share-twitter sd-button share-icon no-text" href="https://shahsparx.me/edge-detection-opencv-python-video-image/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-240" class="share-facebook sd-button share-icon no-text" href="https://shahsparx.me/edge-detection-opencv-python-video-image/?share=facebook&amp;nb=1" target="_blank" title="Click to share on Facebook"><span><span class="share-count">21</span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)<span class="share-count">21</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow noopener noreferrer" data-shared="sharing-google-240" class="share-google-plus-1 sd-button share-icon no-text" href="https://shahsparx.me/edge-detection-opencv-python-video-image/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span></span><span class="sharing-screen-reader-text">Click to share on Google+ (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal jp-relatedposts-grid "><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="342" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://shahsparx.me/opencv-corner-detection-video-image/" title="OpenCV corner detection methods - detect corners in video and image
+
+Hello, readers! I am very pleased to receive some good response to my last post on OpenCV edge detection. Thank you, guys. Shahsparx being a very young blog it means a lot. So I thought it would be a good idea to share some more OpenCV feature detection methods. In…" rel="nofollow" data-origin="240" data-position="0">OpenCV corner detection methods - detect corners in video and image</a></span><span class="jp-relatedposts-post-date">July 6, 2017</span><span class="jp-relatedposts-post-context">In "OpenCV"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="123" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://shahsparx.me/opencv-face-detection-haar-cascades/" title="OpenCV Face Detection in Images using Haar Cascades with Face Count
+
+Hello, Readers! I hope my previous posts on JavaFX material design were useful and informative. This post will hopefully show you some basics of OpenCV face detection using Haar Cascades. So let&#39;s start. OpenCV and Applications First of all, let&#39;s visit the basics. OpenCV is a very useful library that…" rel="nofollow" data-origin="240" data-position="1">OpenCV Face Detection in Images using Haar Cascades with Face Count</a></span><span class="jp-relatedposts-post-date">June 23, 2017</span><span class="jp-relatedposts-post-context">In "OpenCV"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="490" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://shahsparx.me/opencv-eye-detection-glasses-opencv/" title="OpenCV Eye detection example- Try out glasses using OpenCV
+
+Hello, Reader! I hope you are doing well. My last post on this blog was about a utility that I find very useful. You can check it out here: Movie right now. Here I am going to show you a straightforward usage of OpenCV eye detection and masking. The Inspiration:…" rel="nofollow" data-origin="240" data-position="2">OpenCV Eye detection example- Try out glasses using OpenCV</a></span><span class="jp-relatedposts-post-date">July 23, 2017</span><span class="jp-relatedposts-post-context">In "OpenCV"</span></p></div></div>
+			</div><!-- .entry-content -->
+</article><!-- #post-240 -->
+
+<div class="google-auto-placed" style="text-align: center; width: 100%; height: auto; clear: both;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-2773701569602236" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 0px;"><ins id="aswift_4_expand" style="display: inline-table; border: none; height: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 757px; background-color: transparent;"><ins id="aswift_4_anchor" style="display: block; border: none; height: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 757px; background-color: transparent; overflow: hidden; opacity: 0;"><iframe width="757" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;border:0px;width:757px;height:90px;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(7).html"></iframe></ins></ins></ins></div><div id="comments" class="fbox comments-area">
+
+			<h2 class="comments-title">
+			14 thoughts on “<span>Edge detection in OpenCV and Python – Detect edges in video and image</span>”		</h2><!-- .comments-title -->
+
+		
+		<ol class="comment-list">
+					<li id="comment-22" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-22" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/b1911dee7fab5ca9ed929dfda67f6049.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/b1911dee7fab5ca9ed929dfda67f6049?s=64&amp;d=mm&amp;r=g 2x" id="grav-b1911dee7fab5ca9ed929dfda67f6049-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/b1911dee7fab5ca9ed929dfda67f6049?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/b1911dee7fab5ca9ed929dfda67f6049?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/b1911dee7fab5ca9ed929dfda67f6049?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn"><a href="http://www.ankitpalli.com/" rel="external nofollow" class="url">Ankit palli</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-22">
+							<time datetime="2017-07-05T06:12:08+00:00">
+								July 5, 2017 at 6:12 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Your Post Are great…</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-22" onclick="return addComment.moveForm( &quot;div-comment-22&quot;, &quot;22&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Ankit palli">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-23" class="comment byuser comment-author-shahsparx bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-23" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/d07f0c076633d04af1d89b70c977fbb7.jpeg" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=64&amp;d=mm&amp;r=g 2x" id="grav-d07f0c076633d04af1d89b70c977fbb7-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn"><a href="http://shahsparx.me/" rel="external nofollow" class="url">shahsparx</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-23">
+							<time datetime="2017-07-05T06:38:49+00:00">
+								July 5, 2017 at 6:38 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks a lot for the appreciation. Means a lot. <img draggable="false" class="emoji" alt="🙂" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/1f642.svg" scale="0"></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-23" onclick="return addComment.moveForm( &quot;div-comment-23&quot;, &quot;23&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to shahsparx">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-200" class="comment even depth-3">
+			<article id="div-comment-200" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/23ef123c2487228f2976dc3e80311c56.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/23ef123c2487228f2976dc3e80311c56?s=64&amp;d=mm&amp;r=g 2x" id="grav-23ef123c2487228f2976dc3e80311c56-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/23ef123c2487228f2976dc3e80311c56?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/23ef123c2487228f2976dc3e80311c56?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/23ef123c2487228f2976dc3e80311c56?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">steve</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-200">
+							<time datetime="2018-11-06T23:29:41+00:00">
+								November 6, 2018 at 11:29 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thumb up!! Great one</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-200" onclick="return addComment.moveForm( &quot;div-comment-200&quot;, &quot;200&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to steve">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-24" class="pingback odd alt thread-odd thread-alt depth-1">
+			<div class="comment-body">
+				Pingback: <a href="https://shahsparx.me/opencv-corner-detection-video-image/" rel="external nofollow" class="url">OpenCV corner detection methods - detect corners in video and image</a> 			</div>
+</li><!-- #comment-## -->
+		<li id="comment-25" class="comment even thread-even depth-1">
+			<article id="div-comment-25" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/8fe0b59885f034c409fd2340c3a15665.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/8fe0b59885f034c409fd2340c3a15665?s=64&amp;d=mm&amp;r=g 2x" id="grav-8fe0b59885f034c409fd2340c3a15665-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/8fe0b59885f034c409fd2340c3a15665?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/8fe0b59885f034c409fd2340c3a15665?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8fe0b59885f034c409fd2340c3a15665?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">Ahmet</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-25">
+							<time datetime="2017-12-07T13:57:33+00:00">
+								December 7, 2017 at 1:57 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi ,how to save edge detected version as video using OpenCV?<br>
+Thank you</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-25" onclick="return addComment.moveForm( &quot;div-comment-25&quot;, &quot;25&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Ahmet">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-26" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-26" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/ae15079795910300a84788426a03bba2.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=64&amp;d=mm&amp;r=g 2x" id="grav-ae15079795910300a84788426a03bba2-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">Sheikh</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-26">
+							<time datetime="2018-01-17T09:01:43+00:00">
+								January 17, 2018 at 9:01 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>nice code. I managed to apply them except the last one..need a bit of help…</p>
+<p>“Traceback (most recent call last):<br>
+  File “E:\Study stuff\My stuff\9th\ProjectStuff\PathDetection\Pathdetect.py”, line 1, in<br>
+    from transform import four_point_transform<br>
+ImportError: No module named transform”</p>
+<p>i  am totally newbie..and i cant fix this problem</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-26" onclick="return addComment.moveForm( &quot;div-comment-26&quot;, &quot;26&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Sheikh">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-27" class="comment byuser comment-author-shahsparx bypostauthor even depth-2 parent">
+			<article id="div-comment-27" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/d07f0c076633d04af1d89b70c977fbb7.jpeg" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=64&amp;d=mm&amp;r=g 2x" id="grav-d07f0c076633d04af1d89b70c977fbb7-1" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/d07f0c076633d04af1d89b70c977fbb7?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn"><a href="http://shahsparx.me/" rel="external nofollow" class="url">shahsparx</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-27">
+							<time datetime="2018-01-17T09:31:54+00:00">
+								January 17, 2018 at 9:31 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Which version of OpenCV are you using?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-27" onclick="return addComment.moveForm( &quot;div-comment-27&quot;, &quot;27&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to shahsparx">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-28" class="comment odd alt depth-3 parent">
+			<article id="div-comment-28" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/ae15079795910300a84788426a03bba2.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=64&amp;d=mm&amp;r=g 2x" id="grav-ae15079795910300a84788426a03bba2-1" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">Sheikh</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-28">
+							<time datetime="2018-01-18T05:44:10+00:00">
+								January 18, 2018 at 5:44 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>OpenCV 2.4</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-28" onclick="return addComment.moveForm( &quot;div-comment-28&quot;, &quot;28&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Sheikh">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-29" class="comment even depth-4 parent">
+			<article id="div-comment-29" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/ae15079795910300a84788426a03bba2.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=64&amp;d=mm&amp;r=g 2x" id="grav-ae15079795910300a84788426a03bba2-2" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/ae15079795910300a84788426a03bba2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">Sheikh</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-29">
+							<time datetime="2018-01-18T11:16:05+00:00">
+								January 18, 2018 at 11:16 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>i managed to find the module but a new problem arises</p>
+<p>Traceback (most recent call last):<br>
+  File “E:\Study stuff\My stuff\9th\ProjectStuff\PathDetection\Pathdetect.py”, line 10, in<br>
+    gray_vid = cv2.cvtColor(frame, cv2.IMREAD_GRAYSCALE)<br>
+error: C:\build\2_4_winpack-bindings-win64-vc14-static\opencv\modules\imgproc\src\color.cpp:3694: error: (-215) scn == 3 || scn == 4 in function cv::cvtColor</p>
+<p>i cant get to fix this</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-29" onclick="return addComment.moveForm( &quot;div-comment-29&quot;, &quot;29&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Sheikh">Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-30" class="comment odd alt depth-5">
+			<article id="div-comment-30" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/425a18f4723bed02c17c72cd142bab4a.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/425a18f4723bed02c17c72cd142bab4a?s=64&amp;d=mm&amp;r=g 2x" id="grav-425a18f4723bed02c17c72cd142bab4a-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/425a18f4723bed02c17c72cd142bab4a?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/425a18f4723bed02c17c72cd142bab4a?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/425a18f4723bed02c17c72cd142bab4a?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">J3llyfish</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-30">
+							<time datetime="2018-02-01T21:35:03+00:00">
+								February 1, 2018 at 9:35 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You are using the cv2.IMREAD_GRAYSCALE in your cvtColor call. This function is for the imread function. To get the grayscale conversion on your image, use cv2.COLOR_BGR2GRAY.</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-31" class="comment even thread-even depth-1">
+			<article id="div-comment-31" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/7c23467767774820279f7b2128ee5a60.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/7c23467767774820279f7b2128ee5a60?s=64&amp;d=mm&amp;r=g 2x" id="grav-7c23467767774820279f7b2128ee5a60-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/7c23467767774820279f7b2128ee5a60?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/7c23467767774820279f7b2128ee5a60?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/7c23467767774820279f7b2128ee5a60?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">Ak_12</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-31">
+							<time datetime="2018-03-08T02:40:28+00:00">
+								March 8, 2018 at 2:40 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>No module named transform error. How to fix it?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-31" onclick="return addComment.moveForm( &quot;div-comment-31&quot;, &quot;31&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Ak_12">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-109" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-109" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/78f671dc6175a0cb5c0e357665ff9c9b.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/78f671dc6175a0cb5c0e357665ff9c9b?s=64&amp;d=mm&amp;r=g 2x" id="grav-78f671dc6175a0cb5c0e357665ff9c9b-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/78f671dc6175a0cb5c0e357665ff9c9b?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/78f671dc6175a0cb5c0e357665ff9c9b?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/78f671dc6175a0cb5c0e357665ff9c9b?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">Lester Goeppner</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-109">
+							<time datetime="2018-10-02T01:08:14+00:00">
+								October 2, 2018 at 1:08 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>With thanks! Valuable information!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-109" onclick="return addComment.moveForm( &quot;div-comment-109&quot;, &quot;109&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Lester Goeppner">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-206" class="comment even thread-even depth-1">
+			<article id="div-comment-206" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/fc195186a529bc24189362fa73b6e61b.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/fc195186a529bc24189362fa73b6e61b?s=64&amp;d=mm&amp;r=g 2x" id="grav-fc195186a529bc24189362fa73b6e61b-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/fc195186a529bc24189362fa73b6e61b?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/fc195186a529bc24189362fa73b6e61b?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/fc195186a529bc24189362fa73b6e61b?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">this page</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-206">
+							<time datetime="2018-11-12T19:20:39+00:00">
+								November 12, 2018 at 7:20 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hello, I enjoy reading all of your article. I like to write a<br>
+little comment to support you.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-206" onclick="return addComment.moveForm( &quot;div-comment-206&quot;, &quot;206&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to this page">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-208" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-208" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/e2cb47bb3d052a6753193b1d94efab0c.png" class="avatar avatar-32 photo jetpack-lazy-image grav-hashed grav-hijack jetpack-lazy-image--handled" height="32" width="32" srcset="https://secure.gravatar.com/avatar/e2cb47bb3d052a6753193b1d94efab0c?s=64&amp;d=mm&amp;r=g 2x" id="grav-e2cb47bb3d052a6753193b1d94efab0c-0" data-lazy-loaded="1" originals="32" src-orig="https://secure.gravatar.com/avatar/e2cb47bb3d052a6753193b1d94efab0c?s=32&amp;d=mm&amp;r=g" scale="1.5"><noscript><img alt='' src='https://secure.gravatar.com/avatar/e2cb47bb3d052a6753193b1d94efab0c?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e2cb47bb3d052a6753193b1d94efab0c?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' /></noscript>						<b class="fn">Garrett Mcneal</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-208">
+							<time datetime="2018-11-16T05:12:38+00:00">
+								November 16, 2018 at 5:12 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>It’s really awesome. I love it.very interesting and meaningfull post. I got some very important views in your post which are very good and applicable for me. I just wish that I’ll see your another post very soon. I am waiting for that.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-208" onclick="return addComment.moveForm( &quot;div-comment-208&quot;, &quot;208&quot;, &quot;respond&quot;, &quot;240&quot; )" aria-label="Reply to Garrett Mcneal">Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://shahsparx.me/edge-detection-opencv-python-video-image/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://shahsparx.me/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate="">
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200"></p>
+<p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="240" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+<aside id="secondary" class="featured-sidebar widget-area">
+	<section id="search-2" class="fbox swidgets-wrap widget widget_search"><form role="search" method="get" class="search-form" action="https://shahsparx.me/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></section><section id="archives-2" class="fbox swidgets-wrap widget widget_archive"><div class="swidget"><div class="sidebar-title-border"><h3 class="widget-title">Archives</h3></div></div>		<ul>
+			<li><a href="https://shahsparx.me/2018/01/">January 2018</a></li>
+	<li><a href="https://shahsparx.me/2017/11/">November 2017</a></li>
+	<li><a href="https://shahsparx.me/2017/07/">July 2017</a></li>
+	<li><a href="https://shahsparx.me/2017/06/">June 2017</a></li>
+		</ul>
+		</section><section id="nav_menu-3" class="fbox swidgets-wrap widget widget_nav_menu"><div class="menu-top-menu-container"><ul id="menu-top-menu" class="menu"><li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12"><a href="https://shahsparx.me/projects/">Projects</a></li>
+<li id="menu-item-592" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-592"><a href="https://shahsparx.me/about/">About</a></li>
+<li id="menu-item-594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-594"><a href="https://shahsparx.me/contact/">Contact me</a></li>
+<li id="menu-item-212" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-212"><a href="https://shahsparx.me/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-548" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-548"><a href="https://shahsparx.me/cookie-policy/">Cookie Policy</a></li>
+</ul></div></section>		<section id="recent-posts-2" class="fbox swidgets-wrap widget widget_recent_entries">		<div class="swidget"><div class="sidebar-title-border"><h3 class="widget-title">Recent Posts</h3></div></div>		<ul>
+											<li>
+					<a href="https://shahsparx.me/kindle-review-reading-kindle-vs-smartphone/">Kindle Review – Reading on Amazon Kindle vs Smartphone</a>
+									</li>
+											<li>
+					<a href="https://shahsparx.me/arduino-ultrasonic-sensor-alarm/">Arduino ultrasonic sensor alarm | Basic Arduino Projects</a>
+									</li>
+											<li>
+					<a href="https://shahsparx.me/opencv-eye-detection-glasses-opencv/">OpenCV Eye detection example- Try out glasses using OpenCV</a>
+									</li>
+											<li>
+					<a href="https://shahsparx.me/movie-right-now-compare-movies-gui-tool/">Movie Right Now – Compare movies using simple GUI tool</a>
+									</li>
+											<li>
+					<a href="https://shahsparx.me/install-opencv-ubuntu-python-pycharm/">How to Install OpenCV – OpenCV 3.2 on Ubuntu 17.04 with PyCharm</a>
+									</li>
+					</ul>
+		</section><section id="recent-comments-2" class="fbox swidgets-wrap widget widget_recent_comments"><div class="swidget"><div class="sidebar-title-border"><h3 class="widget-title">Recent Comments</h3></div></div><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Garrett Mcneal</span> on <a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-208">Edge detection in OpenCV and Python – Detect edges in video and image</a></li><li class="recentcomments"><span class="comment-author-link">this page</span> on <a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-206">Edge detection in OpenCV and Python – Detect edges in video and image</a></li><li class="recentcomments"><span class="comment-author-link">Trade Bitcoin</span> on <a href="https://shahsparx.me/level-pseudo-column-oracle-example/#comment-202">Level pseudo column in Oracle example || Hierarchical query</a></li><li class="recentcomments"><span class="comment-author-link">steve</span> on <a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#comment-200">Edge detection in OpenCV and Python – Detect edges in video and image</a></li><li class="recentcomments"><span class="comment-author-link">Adult Video Games</span> on <a href="https://shahsparx.me/level-pseudo-column-oracle-example/#comment-192">Level pseudo column in Oracle example || Hierarchical query</a></li></ul></section><section id="custom_html-3" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><script async="" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/f(7).txt"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-2773701569602236",
+          enable_page_level_ads: true
+     });
+</script></div></section><section id="categories-2" class="fbox swidgets-wrap widget widget_categories"><div class="swidget"><div class="sidebar-title-border"><h3 class="widget-title">Categories</h3></div></div>		<ul>
+	<li class="cat-item cat-item-3"><a href="https://shahsparx.me/category/electronics-arduino/">Electronics/Arduino</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="https://shahsparx.me/category/front-end-web-development/">Front-end Web Development</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://shahsparx.me/category/javafx/">JavaFX</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://shahsparx.me/category/linuxunix/">Linux/Unix</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="https://shahsparx.me/category/opencv/" title="Computer vision using python,java">OpenCV</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://shahsparx.me/category/oracle-database/">Oracle database</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://shahsparx.me/category/product-reviews/">Product reviews</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://shahsparx.me/category/projects/">Projects</a>
+</li>
+		</ul>
+</section><section id="search-3" class="fbox swidgets-wrap widget widget_search"><div class="swidget"><div class="sidebar-title-border"><h3 class="widget-title">Looking for a topic? Search.</h3></div></div><form role="search" method="get" class="search-form" action="https://shahsparx.me/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></section><section id="custom_html-5" class="widget_text fbox swidgets-wrap widget widget_custom_html"><div class="textwidget custom-html-widget"><a href="https://www.vultr.com/?ref=7484635"><img src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/banner_3.png" width="300" height="250" data-recalc-dims="1" data-lazy-src="https://i0.wp.com/www.vultr.com/media/banner_3.png?resize=300%2C250&amp;is-pending-load=1#038;ssl=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class=" jetpack-lazy-image"><noscript><img src="https://i0.wp.com/www.vultr.com/media/banner_3.png?resize=300%2C250&#038;ssl=1" width="300" height="250"  data-recalc-dims="1"></noscript></a></div></section></aside><!-- #secondary -->
+</div>
+</div><!-- #content -->
+
+<footer id="colophon" class="site-footer clearfix">
+
+	<div class="content-wrap">
+		
+			
+			
+		</div>
+
+					<div class="google-auto-placed" style="text-align: center; width: 100%; height: auto; clear: both;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-2773701569602236" data-adsbygoogle-status="done" style="display: block; margin: 10px auto; background-color: transparent; height: 104px;"><ins id="aswift_5_expand" style="display: inline-table; border: none; height: 104px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 841px; background-color: transparent;"><ins id="aswift_5_anchor" style="display: block; border: none; height: 104px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 841px; background-color: transparent; overflow: hidden;"><iframe width="841" height="104" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_5" name="aswift_5" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 841px; height: 104px;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(8).html"></iframe></ins></ins></ins></div><div class="site-info">
+				©
+				2019 
+				Syed Shahrukh Ahmad 
+				<span class="footer-info-right">
+					 | Theme by 
+					<a href="http://superbthemes.com/">
+						 Superb WordPress Themes					</a>
+				</span>
+			</div>
+		
+
+</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<div id="smobile-menu" class="mobile-only"><nav id="primary-site-navigation" class="primary-menu main-navigation clearfix">
+
+		<a href="https://shahsparx.me/edge-detection-opencv-python-video-image/#" id="pull" class="smenu-hide toggle-mobile-menu menu-toggle" aria-controls="secondary-menu" aria-expanded="false">Menu</a>
+
+		<div class="content-wrap text-center">
+			<div class="center-main-menu">
+				<div id="primary-menu" class="pmenu"><ul>
+<li class="page_item page-item-8"><a href="https://shahsparx.me/about/">About</a></li>
+<li class="page_item page-item-638"><a href="https://shahsparx.me/blog/">Blog</a></li>
+<li class="page_item page-item-9"><a href="https://shahsparx.me/contact/">Contact me</a></li>
+<li class="page_item page-item-547"><a href="https://shahsparx.me/cookie-policy/">Cookie Policy</a></li>
+<li class="page_item page-item-643"><a href="https://shahsparx.me/payment-confirmation/">Payment Confirmation</a></li>
+<li class="page_item page-item-644"><a href="https://shahsparx.me/payment-failed/">Payment Failed</a></li>
+<li class="page_item page-item-211"><a href="https://shahsparx.me/privacy-policy/">Privacy Policy</a></li>
+<li class="page_item page-item-11"><a href="https://shahsparx.me/projects/">Projects</a></li>
+<li class="page_item page-item-661"><a href="https://shahsparx.me/royal-enfield-continental-gt-650/">Royal Enfield Continental GT 650</a></li>
+</ul></div>
+				</div>
+			</div>
+
+		</nav></div>
+<div id="mobile-menu-overlay"></div>
+
+	<div style="display:none">
+	<div class="grofile-hash-map-b1911dee7fab5ca9ed929dfda67f6049">
+	</div>
+	<div class="grofile-hash-map-d07f0c076633d04af1d89b70c977fbb7">
+	</div>
+	<div class="grofile-hash-map-23ef123c2487228f2976dc3e80311c56">
+	</div>
+	<div class="grofile-hash-map-8fe0b59885f034c409fd2340c3a15665">
+	</div>
+	<div class="grofile-hash-map-ae15079795910300a84788426a03bba2">
+	</div>
+	<div class="grofile-hash-map-425a18f4723bed02c17c72cd142bab4a">
+	</div>
+	<div class="grofile-hash-map-7c23467767774820279f7b2128ee5a60">
+	</div>
+	<div class="grofile-hash-map-78f671dc6175a0cb5c0e357665ff9c9b">
+	</div>
+	<div class="grofile-hash-map-fc195186a529bc24189362fa73b6e61b">
+	</div>
+	<div class="grofile-hash-map-35e6c7334506fa53fab1a1895405cc86">
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/shahsparx.me\/edge-detection-opencv-python-video-image\/":240};
+	</script>
+				<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/shCore.js.download"></script><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(9).html"></iframe></ins></ins></ins>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/shBrushPython.js.download"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://shahsparx.me/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://shahsparx.me/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://shahsparx.me/wp-content/plugins/jetpack/modules/carousel/jetpack-carousel-ie8fix.css?ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/photon.min.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/devicepx-jetpack.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/checkout.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/jquery.validate.min.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/accounting.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var spGeneral = {"strings":{"currency":"USD","currencySymbol":"$","currencyPosition":"left","decimalSeparator":".","thousandSeparator":",","ajaxurl":"https:\/\/shahsparx.me\/wp-admin\/admin-ajax.php"},"booleans":{"isZeroDecimal":false,"scriptDebug":false},"i18n":{"mediaTitle":"Insert Media","mediaButtonText":"Use Image"},"integers":{"decimalPlaces":2,"minAmount":0.5}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/shared.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var simplePayForms = [];
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/public.min.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/gprofiles.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/wpgroho.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/navigation.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/skip-link-focus-fix.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/script.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/comment-reply.min.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/lazy-images.min.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/wp-embed.min.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/spin.min.js.download"></script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/jquery.spin.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/shahsparx.me\/wp-admin\/admin-ajax.php","nonce":"470d421619","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/shahsparx.me\/wp-login.php?redirect_to=https%3A%2F%2Fshahsparx.me%2Fedge-detection-opencv-python-video-image%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/jetpack-carousel.min.js.download"></script><iframe id="google_osd_static_frame_1467370739813" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(10).html"></iframe>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/sharing.min.js.download"></script>
+<script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+</script>
+<script type="text/javascript" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/e-201908.js.download" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.7',blog:'131160958',post:'240',tz:'0',srv:'shahsparx.me'} ]);
+	_stq.push([ 'clickTrackerInit', '131160958', '240' ]);
+</script>
+
+
+<img src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/g.gif" alt=":)" width="6" height="5" id="wpstats" scale="0"></body><iframe id="google_shimpl" style="display: none;" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/saved_resource(11).html"></iframe><iframe id="google_esf" name="google_esf" src="./Edge detection in OpenCV and Python - Detect edges in video and image - Syed Shahrukh Ahmad_files/zrt_lookup.html" data-ad-client="ca-pub-2773701569602236" style="display: none;"></iframe><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>
